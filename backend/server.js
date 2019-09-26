@@ -11,12 +11,9 @@ const connectionURL = 'mongodb://localhost:27017:27017/task-manager'
 const objID = ObjectID();
 let db = mongoose.connect(connectionURL,{useNewUrlParser: true});
 
-const userManagmentModule = require('./userManagmentModule.js');
 
-//userManagmentModule.addUser("Jitendra Patel");
-var uinfo = userManagmentModule.getUser(ObjectID("5d8b6db2f33f8b823bdea5e3"));
-
-console.log(uinfo);
+//var uinfo = userManagmentModule.getUser(ObjectID("5d8b6db2f33f8b823bdea5e4"));
+//console.log(uinfo);
 //console.log(message.error("This is my error message has to show"));
 
 //create express app
@@ -27,28 +24,13 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
-
-
 //define a simple route 
 app.get('/',(req,res) => {
 	res.json({'message':'Welcome to Easy system'});
 });
 
-app.get('/login',(req,res)=>{
-	res.json({'Login':'This is login system'});
-});
-
-app.get('/register',(req,res)=>{
-	res.json({'Login':'This is login system'});
-});
-
-app.get('/forgot',(req,res)=>{
-	res.json({'Login':'This is login system'});
-});
-
-app.get('/add-new-user',(req,res)=>{
-	res.json({'Login':'New User Add'});
-});
+app.use('/auth',require('./auth.js'));
+app.use('/user',require('./usermanage.js'));
 
 
 app.listen(3000,()=>{

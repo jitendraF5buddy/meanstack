@@ -5,7 +5,20 @@ const Schema = mongoose.Schema;
 //UserCollection 
 const DataSchema = new Schema(
   {
-    message: String
+    first_name:{
+      type:String,
+      required: true
+    },
+    last_name: String,
+    email:{
+      type:String,
+      required: true,
+      trim:true
+    },
+    phone:Number,
+    password:String,
+    message: String,
+
   },
   { timestamps: true }
 );

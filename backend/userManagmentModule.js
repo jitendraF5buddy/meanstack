@@ -1,31 +1,40 @@
 // Use usersCollection 
 const {usersCollection} = require('./schemaModel.js');
 
-const userManagment = {
-	addUser : function(userinfo){
+	addUser = (userinfo) => {
 		 //console.log("succesfdsfsdf");
 		var inserUser = new usersCollection({message:userinfo});
 		inserUser.save(function (err) {
 			if(err){
 				console.log("error add to add user info");
 			}
-		  	console.log("Sucessfully created new user",userinfo);
+		  	return { title: "The Guards", author: "Ken Bruen" };
 		  // saved!
 		});
-	},
-	getUser: function(userId){
-		
-		usersCollection.findById(userId).then((result)=>{
-			return result;
-		}).catch((error)=>{
-			return error;
+	}
+	
+	getUser = async (userId) => {
+
+		await usersCollection.findById(userId,(error,result)=>{
+			if(error){
+				console.log(error);
+			}
+			return "Hello world"
 		})
-	},
-	updateUser : function(userId, UserData){
+		
+		
+	}
+	
+	updateUser = (userId, UserData) => {
 		console.log("Update user info ID",userId);
-	},
-	deleteUser : function(userId){
+	}
+	
+	deleteUser  =(userId) => {
 		console.log("Delete User ID",userId);
 	}
-}
-module.exports = userManagment;
+
+
+module.exports.addUser = addUser;
+module.exports.getUser = getUser;
+module.exports.updateUser = updateUser;
+module.exports.deleteUser = deleteUser;
